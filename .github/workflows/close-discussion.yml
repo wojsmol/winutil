@@ -16,7 +16,8 @@ jobs:
         if: github.event.pull_request.merged == true
         id: extract-discussion
         run: |
-          echo "discussion=$(echo '${{ github.event.pull_request.body }}' | grep -oP '(?<=Resolves #)\d+')" >> $GITHUB_OUTPUT
+          discussion=$(echo "${{ github.event.pull_request.body }}" | grep -oP '(?<=Resolves #)\d+')
+          echo "discussion=$discussion" >> $GITHUB_OUTPUT
         shell: bash
 
       - name: Close the discussion
